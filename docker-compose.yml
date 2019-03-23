@@ -8,7 +8,7 @@ services:
       - MYSQL_USER=dba
       - MYSQL_PASSWORD_FILE=/run/secrets/mysql-user-pw
     secrets:
-      - mysql-root-pw
+      - mysql-user-pw
 
   spring-boot:
     image: kwonghung/spring-boot-and-docker-secret:latest
