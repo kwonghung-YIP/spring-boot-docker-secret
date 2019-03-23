@@ -12,5 +12,5 @@ jdk:
 script:
   - docker build -t kwonghung/spring-boot-and-docker-secret .
   - docker login --help
-  - echo "$DOCKER_HUB_PASSWORD" | docker login --username "$DOCKER_HUB_USERNAME" --password-stdin
+  - echo "$DOCKER_HUB_PASSWD" | docker login --username "$DOCKER_HUB_LOGIN" --password-stdin
   - docker push kwonghung/spring-boot-and-docker-secret
