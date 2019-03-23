@@ -15,7 +15,7 @@ import org.springframework.core.env.MapPropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 
-@Component
+//@Component
 public class DockerSecretProcessor implements EnvironmentPostProcessor {
 
 	@Override
@@ -23,7 +23,7 @@ public class DockerSecretProcessor implements EnvironmentPostProcessor {
 		
 		String bindPathPpty = environment.getProperty("docker-secret.bind-path");
 		
-		System.out.println(bindPathPpty);
+		System.out.println("value of \"docker-secret.bind-path\" property:" + bindPathPpty);
 		
 		if (bindPathPpty!=null) {
 			Path bindPath = Paths.get(bindPathPpty);
