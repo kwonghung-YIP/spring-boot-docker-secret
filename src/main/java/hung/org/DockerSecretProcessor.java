@@ -23,6 +23,8 @@ public class DockerSecretProcessor implements EnvironmentPostProcessor {
 		
 		String bindPathPpty = environment.getProperty("docker-secret.bind-path");
 		
+		System.out.println(bindPathPpty);
+		
 		if (bindPathPpty!=null) {
 			Path bindPath = Paths.get(bindPathPpty);
 			if (Files.isDirectory(bindPath)) {
@@ -49,6 +51,13 @@ public class DockerSecretProcessor implements EnvironmentPostProcessor {
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
+				
+				dockerSecrets
+				  .entrySet()
+				    .forEach(entry -> {
+				    	System.out.println(entry.getKey()+"="+entry.getValue());
+				    });
+				
 				MapPropertySource pptySource = new MapPropertySource("docker-secrets",dockerSecrets);
 				
 				environment.getPropertySources().addLast(pptySource);
