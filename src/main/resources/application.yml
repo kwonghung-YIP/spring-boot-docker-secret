@@ -8,12 +8,12 @@ spring:
 
 ---
 spring:
-  profiles: docker
+  profiles: docker-stack
   
   datasource:
-    url: jdbc:mysql://dockerce01:3306/mysql
+    url: jdbc:mysql://mysql:3306/mysql
     username: root
-    password: ${docker-secret-mysql-password}
+    password: ${docker-secret-mysql-root-pw}
     
 docker-secret:
   bind-path: /run/secrets

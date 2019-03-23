@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql-root-pw
+    secrets:
+      - mysql-root-pw
+
+  spring-boot:
+    image: kwonghung/spring-boot-and-docker-secret:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker-stack
+    secrets:
+      - mysql-root-pw
+
+secrets:
+  mysql-root-pw:
+    external: true
