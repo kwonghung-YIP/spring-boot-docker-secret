@@ -5,5 +5,10 @@ services:
 
 before_install:
   - chmod +x gradlew
+  
 jdk:
   - oraclejdk8
+
+script:
+  - docker build -t kwonghung/spring-boot-and-docker-secret .
+  - docker push kwonghung/spring-boot-and-docker-secret
