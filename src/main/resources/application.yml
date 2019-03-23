@@ -11,9 +11,9 @@ spring:
   profiles: docker-stack
   
   datasource:
-    url: jdbc:mysql://mysql:3306/mysql
-    username: root
-    password: ${docker-secret-mysql-root-pw}
+    url: jdbc:mysql://mysql:3306/testdb
+    username: dba
+    password: ${docker-secret-mysql-user-pw}
     
 docker-secret:
   bind-path: /run/secrets

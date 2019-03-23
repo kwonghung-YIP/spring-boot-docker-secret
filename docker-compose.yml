@@ -4,7 +4,9 @@ services:
   mysql:
     image: mysql:8
     environment:
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql-root-pw
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=dba
+      - MYSQL_PASSWORD_FILE=/run/secrets/mysql-user-pw
     secrets:
       - mysql-root-pw
 
@@ -15,8 +17,8 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker-stack
     secrets:
-      - mysql-root-pw
+      - mysql-user-pw
 
 secrets:
-  mysql-root-pw:
+  mysql-user-pw:
     external: true
