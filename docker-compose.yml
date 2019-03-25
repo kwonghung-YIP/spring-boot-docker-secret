@@ -11,6 +11,11 @@ services:
     secrets:
       - mysql-user-pw
 
+  mysql2:
+    image: mysql:8
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+
   spring-boot:
     image: kwonghung/spring-boot-and-docker-secret:latest
     ports:
