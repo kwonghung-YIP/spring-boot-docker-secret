@@ -6,28 +6,23 @@ This demo shows how spring boot loading the password property from docker secret
 
 ```yaml
 spring:
+  profiles: docker-stack
+  
   datasource:
-    password: ${docker-secret-mydb-password}
-```
-# Define docker service and secret
-
-```
-docker secret
-docker service create \
-  --secret
-```
-
-# EnvironmentPostProcessor implementation
-
-```spring
+    url: jdbc:mysql://mysql:3306/testdb
+    username: dba
+    password: ${docker-secret-mysql-user-pw}
+    
+docker-secret:
+  bind-path: /run/secrets
 ```
 
 # Run the demo
 
 ```bash
-printf "password"|docker secret create mysql-user-pw -
-```
+docker swarm init
 
-```bash
+printf "password"|docker secret create mysql-user-pw -
+
 wget -qO- --no-cache https://raw.githubusercontent.com/kwonghung-YIP/spring-boot-docker-secret/master/docker-compose.yml | docker stack deploy --compose-file - demo
 ```
