@@ -15,7 +15,7 @@ jdk:
   - oraclejdk8
 
 script:
-  - docker build -t kwonghung/spring-boot-and-docker-secret .
+  - docker build -t kwonghung/spring-boot-docker-secret .
   - docker login --help
   - echo "$DOCKER_HUB_PASSWD" | docker login --username "$DOCKER_HUB_LOGIN" --password-stdin
-  - docker push kwonghung/spring-boot-and-docker-secret
+  - docker push kwonghung/spring-boot-docker-secret
