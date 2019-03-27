@@ -3,4 +3,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'spring-boot-and-docker-secret'
+rootProject.name = 'spring-boot-docker-secret'
