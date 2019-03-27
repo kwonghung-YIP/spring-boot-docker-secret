@@ -55,7 +55,7 @@ public class DockerSecretProcessor implements EnvironmentPostProcessor {
 				dockerSecrets
 				  .entrySet()
 				    .forEach(entry -> {
-				    	System.out.println(entry.getKey()+"="+entry.getValue());
+				    	System.out.println(entry.getKey()+"=\""+entry.getValue()+"\"");
 				    });
 				
 				MapPropertySource pptySource = new MapPropertySource("docker-secrets",dockerSecrets);
