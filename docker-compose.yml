@@ -4,18 +4,12 @@ services:
   mysql:
     image: mysql:8
     environment:
-      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=yes
       - MYSQL_DATABASE=testdb
       - MYSQL_USER=dba
-      - MYSQL_PASSWORD=password
-      - MYSQL_DEBUG=yes
+      - MYSQL_PASSWORD_FILE=/run/secrets/mysql-user-pw
     secrets:
       - mysql-user-pw
-
-  mysql2:
-    image: mysql:8
-    environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
 
   spring-boot:
     image: kwonghung/spring-boot-and-docker-secret:latest
