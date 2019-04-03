@@ -1,10 +1,10 @@
 # Introduction
 
-This demo shows how spring boot loading the password property from docker secret, instead of hard coding it in your application.yml file.
+This demo shows how to load the docker secrets into spring boot environment properties, it prevents the password property such as **spring.datasource.password** being exposed as plain text in your application.yml file.
 
 # "spring.datasource.password" in application.yml 
 
-The **spring.datasource.password** property refers to other property **${docker-secret-mysql-user-pw}**, which is prepared by the EnvironmentPostProcessor implementation. The **docker-secret-** prefix identifies the property is loaded from docker secret, and **mysql-user-pw** is the filename bind in docker container.
+The **spring.datasource.password** property in our demo refers to other property **${docker-secret-mysql-user-pw}**, which is preload by our EnvironmentPostProcessor implementation. The **docker-secret-** prefix identifies that property is loaded from docker secret, and **mysql-user-pw** is the filename bind within the docker container.
 
 ```yaml
 spring:
