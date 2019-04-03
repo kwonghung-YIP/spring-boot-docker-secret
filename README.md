@@ -2,7 +2,9 @@
 
 This demo shows how spring boot loading the password property from docker secret, instead of hard coding it in a yaml or properties file. The idea is to load the password stored in docker secert as the properties, then other properties such as "spring.datasource.password" can refer to it.
 
-# "spring.datasource.password" is no more a plain text password in application.yml 
+# "spring.datasource.password" in application.yml 
+
+The **spring.datasource.password** property refers to other property **${docker-secret-mysql-user-pw}**, which is prepared by the EnvironmentPostProcessor implementation. The **docker-secret-** prefix identifies the property is loaded from docker secret, and **mysql-user-pw** is the filename bind in docker container.
 
 ```yaml
 spring:
@@ -18,6 +20,9 @@ docker-secret:
 ```
 
 # docker-compose.yml
+
+The spring-boot service bind the secret **mysql-user-pw** which store the password of user **dba**.
+
 ```yml
 version: '3.7'
 
@@ -33,7 +38,7 @@ services:
       - mysql-user-pw
 
   spring-boot:
-    image: kwonghung/spring-boot-docker-secret:latest
+    image: [kwonghung/spring-boot-docker-secret:latest]()
     ports:
       - "8080:8080"
     environment:
@@ -48,7 +53,7 @@ secrets:
 
 # EnvironmentPostProcessor Implementation
 
-The [DockerSecretProcessor](/src/main/java/hung/org/DockerSecretProcessor.java) implements the [EnvironmentPostProcessor](https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#howto-customize-the-environment-or-application-context) interface
+The [DockerSecretProcessor](/src/main/java/hung/org/DockerSecretProcessor.java) implements the [EnvironmentPostProcessor](https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#howto-customize-the-environment-or-application-context) interface, it loads all the files under **/run/secrets** 
 
 # META-INF/spring.factories
 
