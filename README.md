@@ -55,7 +55,7 @@ secrets:
 
 The [DockerSecretProcessor](/src/main/java/hung/org/DockerSecretProcessor.java) implements the [EnvironmentPostProcessor](https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#howto-customize-the-environment-or-application-context) interface, it loads all the files under the **/run/secrets** direcotry.
 
-For this demo the docker secret bind to file **/run/secrets/mysql-user-pw"** is loaded as spring boot property **docker-secret-mysql-user-pw**.
+For this demo, the docker secret **my-user-pw** is bind as file **/run/secrets/mysql-user-pw"** in the docker image, which is loaded as the spring boot property **docker-secret-mysql-user-pw**.
 
 # META-INF/spring.factories
 
