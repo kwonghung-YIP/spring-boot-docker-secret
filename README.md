@@ -2,7 +2,7 @@
 
 This demo shows how spring boot loading the password property from docker secret, instead of hard coding it in a yaml or properties file. The idea is to load the password stored in docker secert as the properties, then other properties such as "spring.datasource.password" can refer to it.
 
-# "spring.datasource.password" in application.yml 
+# "spring.datasource.password" is no more a plain text password in application.yml 
 
 ```yaml
 spring:
@@ -48,9 +48,11 @@ secrets:
 
 # EnvironmentPostProcessor Implementation
 
-The DockerSecretProcessor implements the EnvironmentPostProcessor interface
+The [DockerSecretProcessor](/src/main/java/hung/org/DockerSecretProcessor.java) implements the [EnvironmentPostProcessor](https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#howto-customize-the-environment-or-application-context) interface
 
 # META-INF/spring.factories
+
+And you have to declare your EnvironmentPostProcessor class in META-INF/spring.factories file
 
 ```properties
 org.springframework.boot.env.EnvironmentPostProcessor=hung.org.DockerSecretProcessor
@@ -60,10 +62,13 @@ org.springframework.boot.env.EnvironmentPostProcessor=hung.org.DockerSecretProce
 
 ```bash
 docker swarm init
-
+```
+```bash
 printf "password"|docker secret create mysql-user-pw -
-
+```
+```bash
 wget -qO- --no-cache https://raw.githubusercontent.com/kwonghung-YIP/spring-boot-docker-secret/master/docker-compose.yml
-
+```
+```bash
 docker stack deploy --compose-file docker-compose.yml demo
 ```
