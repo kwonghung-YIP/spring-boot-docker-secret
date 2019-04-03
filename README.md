@@ -53,7 +53,9 @@ secrets:
 
 # EnvironmentPostProcessor Implementation
 
-The [DockerSecretProcessor](/src/main/java/hung/org/DockerSecretProcessor.java) implements the [EnvironmentPostProcessor](https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#howto-customize-the-environment-or-application-context) interface, it loads all the files under **/run/secrets** 
+The [DockerSecretProcessor](/src/main/java/hung/org/DockerSecretProcessor.java) implements the [EnvironmentPostProcessor](https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#howto-customize-the-environment-or-application-context) interface, it loads all the files under the **/run/secrets** direcotry.
+
+For this demo the docker secret bind to file **/run/secrets/mysql-user-pw"** is loaded as spring boot property **docker-secret-mysql-user-pw**.
 
 # META-INF/spring.factories
 
@@ -65,15 +67,32 @@ org.springframework.boot.env.EnvironmentPostProcessor=hung.org.DockerSecretProce
 
 # Run the demo as docker stack
 
+1. Get the docker swarm ready, or initiate a new swarm.
+
 ```bash
 docker swarm init
 ```
+
+2. Define the docker secret in the manager node.
+
 ```bash
 printf "password"|docker secret create mysql-user-pw -
 ```
+
+4. Download the docker-compose.yml.
+
 ```bash
 wget -qO- --no-cache https://raw.githubusercontent.com/kwonghung-YIP/spring-boot-docker-secret/master/docker-compose.yml
 ```
+
+5. Start the docker stack.
+
 ```bash
 docker stack deploy --compose-file docker-compose.yml demo
+```
+
+6. Try the link.
+
+```bash
+curl http://localhost:8080/
 ```
