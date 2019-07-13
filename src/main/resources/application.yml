@@ -18,3 +18,14 @@ spring:
     
 docker-secret:
   bind-path: /run/secrets
+---
+spring:
+  profiles: k8s
+  
+  datasource:
+    url: jdbc:mysql://mysql-svc:3306/testdb
+    username: testuser
+    password: ${docker-secret-mysql-passwd}
+    
+ docker-secret:
+   bind-path: /run/secrets
