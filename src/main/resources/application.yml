@@ -27,5 +27,5 @@ spring:
     username: testuser
     password: ${docker-secret-mysql-passwd}
     
- docker-secret:
-   bind-path: /run/secrets
+docker-secret:
+  bind-path: /run/secrets
