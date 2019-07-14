@@ -25,7 +25,7 @@ spring:
   datasource:
     url: jdbc:mysql://mysql-svc:3306/testdb
     username: testuser
-    password: ${docker-secret-mysql-passwd}
+    password: passw0rd
     
-docker-secret:
+docker-secret1:
   bind-path: /run/secrets
