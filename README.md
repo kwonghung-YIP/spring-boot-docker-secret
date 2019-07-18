@@ -4,7 +4,7 @@ This demo shows how to load the docker secrets into spring boot environment prop
 
 # "spring.datasource.password" in application.yml 
 
-The **spring.datasource.password** property in our demo refers to other property **${docker-secret-mysql-user-pw}**, which is preload by our EnvironmentPostProcessor implementation. The **docker-secret-** prefix identifies that property is loaded from docker secret, and **mysql-user-pw** is the filename bind within the docker container.
+The **spring.datasource.password** property in our demo refers to other property **${docker-secret-mysql-user-pw}**, which is preload by our EnvironmentPostProcessor implementation. The prefix **docker-secret-** helps to identify that the property is loaded from docker secret, and **mysql-user-pw** is the filename bind within the docker container under the **/run/secrets** folder.
 
 ```yaml
 spring:
@@ -38,7 +38,7 @@ services:
       - mysql-user-pw
 
   spring-boot:
-    image: [kwonghung/spring-boot-docker-secret:latest]()
+    image: [kwonghung/spring-boot-docker-secret:latest](https://cloud.docker.com/u/kwonghung/repository/docker/kwonghung/spring-boot-docker-secret)
     ports:
       - "8080:8080"
     environment:
@@ -53,7 +53,7 @@ secrets:
 
 # EnvironmentPostProcessor Implementation
 
-The [DockerSecretProcessor](/src/main/java/hung/org/DockerSecretProcessor.java) implements the [EnvironmentPostProcessor](https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#howto-customize-the-environment-or-application-context) interface, it loads all the files under the **/run/secrets** direcotry.
+The [DockerSecretProcessor](/src/main/java/hung/org/DockerSecretProcessor.java) implements the [EnvironmentPostProcessor](https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#howto-customize-the-environment-or-application-context) interface, it loads all the files under the **/run/secrets** folder as environment properties.
 
 For this demo, the docker secret **my-user-pw** is bind as file **/run/secrets/mysql-user-pw"** in the docker image, which is loaded as the spring boot property **docker-secret-mysql-user-pw**.
 
