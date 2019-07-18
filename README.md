@@ -76,7 +76,7 @@ docker swarm init
 2. Define the docker secret in the manager node.
 
 ```bash
-printf "password"|docker secret create mysql-user-pw -
+echo -n "password"|docker secret create mysql-user-pw -
 ```
 
 4. Download the docker-compose.yml.
