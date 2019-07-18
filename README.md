@@ -38,7 +38,7 @@ services:
       - mysql-user-pw
 
   spring-boot:
-    image: [kwonghung/spring-boot-docker-secret:latest](https://cloud.docker.com/u/kwonghung/repository/docker/kwonghung/spring-boot-docker-secret)
+    image: kwonghung/spring-boot-docker-secret:latest
     ports:
       - "8080:8080"
     environment:
